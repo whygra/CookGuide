@@ -1,0 +1,60 @@
+.taskWrapper{
+    display: flex;
+}
+
+.rulerWrapper{
+    position: relative;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    height: 30px;
+    width: 95vmin;
+    left: 30px;
+    background-color:rgb(255, 255, 255);
+    padding: 50px, 40px, 20px, 40px;
+}
+
+.container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgb(211, 211, 211);
+    
+}
+
+.ruler{
+    position: absolute;
+    height: 29px;
+    width: 98%;
+    left: 0px;
+    right: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.scale1{
+    height: 100%;
+    width:1px;
+}
+
+.scale5{
+    height: 100%;
+    width:1px;
+}
+
+.scale10{
+    height: 100%;
+    width:1px;
+}
+
+.scale30{
+    height: 100%;
+    width:1px;
+}
+.scale60{
+    height: 100%;
+    width:1px;
+}
+.taskWrapper button {
+    width: 30px
+}
