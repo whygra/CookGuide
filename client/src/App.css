@@ -7,6 +7,12 @@
     font-family: "Poppins", sans-serif;
 }
 
+div{
+    --chart-side-width: 150px;
+    --inner-border-color: rgb(211, 211, 211);
+    --outer-border-color: rgb(138, 138, 138);
+}
+
 body {
     height: 100vh;
     display: -ms-grid;

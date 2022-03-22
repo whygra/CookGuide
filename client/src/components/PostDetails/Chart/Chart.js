@@ -3,34 +3,35 @@ import Task from './Task/Task'
 import {useState} from 'react'
 import styles from './Chart.module.css'
 
-let initTasks = [
-    {id: 0, name: "qq", timeStart: 0, timeEnd: 15},
-    {id: 1, name: "qq", timeStart: 15, timeEnd: 50},
-    {id: 2, name: "qq", timeStart: 50, timeEnd: 60},
+const initTasks = [
+    {id: 0, name: "qq", timeStart: 0, timeEnd: 15, key: "init0"},
+    {id: 1, name: "qq", timeStart: 15, timeEnd: 50, key: "init1"},
+    {id: 2, name: "qq", timeStart: 50, timeEnd: 60, key: "init2"},
 ]
 
 const Chart = (props) => {
     const [length, setLength] = useState(60);
     const [tasks, setTasks] = useState(initTasks);
 
-    function addTask(){
+    const addTask = () => {
         const newTask = {
             id: tasks.length,
             name: "",
             timeStart: 0,
-            timeEnd: Math.floor(length/4)
+            timeEnd: Math.floor(length/4),
+            key: new Date().getTime()
         }
         setTasks([
             ...tasks,
             newTask
         ])
     }
-    function removeTask(id){
-        tasks.splice(id, 1)
-        for (let i = 0; i < tasks.length; i++){
-            tasks[i].id = i;
+    function removeTask(key){
+        let newTasks = tasks.filter((item) => item.key !== key);
+        for (let i = 0; i < newTasks.length; i++){
+            newTasks[i].id = i;
         }
-        setTasks([...tasks])
+        setTasks([...newTasks])
     }
 
     const createRuler = () => {
@@ -69,26 +70,21 @@ const Chart = (props) => {
 
     return(
         <div>
-        <h1>Chart</h1>
         <div className={styles.rulerWrapper}>
+
             <input type="number" min="5" value={length}
             onChange={(e)=>setLength(e.target.value)}></input>
 
-            <div className={styles.container}>
+            <div className={styles.rulerContainer}>
                 {createRuler()}
             </div>
         </div>
         {
             tasks.map(el =>
-            <div key={el.id} className={styles.taskWrapper}>
-                <button key={"remove" + el.id}
-                onClick={() => removeTask(el.id)}>X</button>
-
-                <Task key={"task" + el.id} name={el.name}
+                <Task key={el.key} name={el.name}
                 timeStart={el.timeStart} timeEnd={el.timeEnd}
-                length={length}/>
-            </div>
-            )
+                removeFn={() => removeTask(el.key)}
+                length={length}/>)
         }
         <button onClick={addTask}>add task</button>
         </div>

@@ -4,8 +4,6 @@ import {useState} from 'react'
 
 let minGap = 1;
 
-
-
 const Task = (props) => {
 
     const [name, setName] = useState(props.name)
@@ -94,10 +92,12 @@ const Task = (props) => {
 
     return(
         <div className={styles.wrapper}>
-        <input type="text" className={styles.task}
-         value={name} onChange={nameChange}/>
-
-        <div className={styles.container}>
+            <div className={styles.side}>
+            <button onClick={props.removeFn}>X</button>
+            <input type="text" className={styles.taskName}
+            value={name} onChange={nameChange}/>
+            </div>
+        <div className={styles.track}>
 
             {createRuler()}
 
@@ -122,8 +122,6 @@ const Task = (props) => {
                 className={styles.slider}
                 id={styles.slider2}
                 onChange={slideTwo}/>
-            
-            
         </div>
         </div>
     )

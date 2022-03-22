@@ -7,6 +7,7 @@ import PostsList from './components/PostsList/PostsList'
 import PostDetails from './components/PostDetails/PostDetails'
 
 const App = () => {
+    
     return(
         <div>
             <img src={logo} alt="logo" height="60"></img>
