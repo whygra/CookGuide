@@ -1,0 +1,28 @@
+.component {
+    position: relative;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    height: 30px;
+    width: 95vmin;
+    background-color:rgb(255, 255, 255);
+    border: 1px solid var(--border-color);
+    padding: 50px, 40px, 20px, 40px;
+}
+.contents {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.contents input{
+    /* border: none; */
+}
+.rmvBtn {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.compName {
+    padding: 5px;
+    width: 100%;
+}
