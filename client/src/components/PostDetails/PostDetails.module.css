@@ -1,0 +1,22 @@
+.postDetails {
+    display: grid;
+    flex-direction: column;
+    width: 95vmin;
+}
+
+.title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 10px 10px 15px;
+    font: 4em sans-serif;
+    width: 95vmin;
+    border: none;
+    border-bottom: solid 3px var(--outer-border-color);
+    border-radius: 10px;
+}
+
+.image {
+    width: 95vmin;
+    margin-bottom: 1em;
+    border-radius: 1em;
+}

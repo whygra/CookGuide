@@ -6,6 +6,7 @@
     width: 95vmin;
     background-color:rgb(255, 255, 255);
     padding: 50px, 40px, 20px, 40px;
+
 }
 
 .side{
@@ -59,7 +60,7 @@
     width: 7px;
     border: solid black 1px;
     background-color:white;
-    cursor: pointer;
+    cursor: ew-resize;
     border-radius: 10px;
     pointer-events: auto;
     margin-top: -8px;
@@ -70,7 +71,7 @@
     width: 7px;
     border: solid black 1px;
     background-color:white;
-    cursor: pointer;
+    cursor: ew-resize;
     border-radius: 10px;
     pointer-events: auto;
     margin-top: -8px;
@@ -81,7 +82,7 @@
     width: 7px;
     border: solid black 1px;
     background-color:white;
-    cursor: pointer;
+    cursor: ew-resize;
     border-radius: 10px;
     pointer-events: auto;
     margin-top: -8px;
@@ -93,7 +94,7 @@
     width: 7px;
     border: solid black 1px;
     background-color:white;
-    cursor: pointer;
+    cursor: ew-resize;
     border-radius: 10px;
     pointer-events: auto;
     margin-top: -8px;
@@ -129,7 +130,7 @@
     width: 100%;
     background-color:rgba(0, 0, 0, 0);
     border: none;
-    cursor: ew-resize;
+    cursor: pointer;
     border-radius: 0px;
     pointer-events: auto;
     margin-top: -8px;
@@ -141,7 +142,7 @@
     width: 10px;
     background-color:rgba(0, 0, 0, 0);
     border: none;
-    cursor: ew-resize;
+    cursor: pointer;
     border-radius: 0px;
     pointer-events: auto;
     margin-top: -8px;

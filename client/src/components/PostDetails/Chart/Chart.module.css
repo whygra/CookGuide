@@ -1,3 +1,7 @@
+.chart{
+    padding-bottom: 30px;
+}
+
 .taskWrapper{
     display: flex;
 }

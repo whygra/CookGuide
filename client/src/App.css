@@ -13,10 +13,21 @@ div{
     --outer-border-color: rgb(138, 138, 138);
 }
 
-body {
+.App {
     height: 100vh;
-    display: -ms-grid;
-    display: grid;
     background-color: rgb(255, 235, 184);
-    place-items: center;
+    overflow-y: hidden;
+    display: flex;
+
+}
+
+.pageContent{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    top: 0px;
+    overflow: auto;
+    padding: 10px;
+    scroll-behavior: smooth;
 }

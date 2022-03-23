@@ -8,8 +8,8 @@ const initComponents = [
     {id: 1, name: "comp", quantity: 1, key: "init1"},
 ]
 
-const Components = () => {
-    const [comps, setComps] = useState(initComponents);
+const Components = (props) => {
+    const [comps, setComps] = useState(props.comps);
 
     const addComp = () => {
         const newComp = {
@@ -32,7 +32,7 @@ const Components = () => {
     }
 
     return(
-        <div className={styles.compsContainer}>
+        <div className={styles.components}>
         {comps.map(el =>
             <Component key={el.key}
             name={el.name} quantity={el.quantity}

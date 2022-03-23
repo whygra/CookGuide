@@ -3,15 +3,10 @@ import Task from './Task/Task'
 import {useState} from 'react'
 import styles from './Chart.module.css'
 
-const initTasks = [
-    {id: 0, name: "qq", timeStart: 0, timeEnd: 15, key: "init0"},
-    {id: 1, name: "qq", timeStart: 15, timeEnd: 50, key: "init1"},
-    {id: 2, name: "qq", timeStart: 50, timeEnd: 60, key: "init2"},
-]
 
 const Chart = (props) => {
-    const [length, setLength] = useState(60);
-    const [tasks, setTasks] = useState(initTasks);
+    const [length, setLength] = useState(props.length);
+    const [tasks, setTasks] = useState(props.tasks);
 
     const addTask = () => {
         const newTask = {
@@ -69,7 +64,7 @@ const Chart = (props) => {
     }
 
     return(
-        <div>
+        <div className={styles.chart}>
         <div className={styles.rulerWrapper}>
 
             <input type="number" min="5" value={length}
