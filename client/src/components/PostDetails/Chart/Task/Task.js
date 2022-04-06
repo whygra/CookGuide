@@ -1,78 +1,88 @@
 import React from 'react'
 import styles from './Task.module.css'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 let minGap = 1;
 
 const Task = (props) => {
+    const length = parseInt(props.length)
+    const timeStart = parseInt(props.task.timeStart)
+    const timeEnd = parseInt(props.task.timeEnd)
 
-    const [name, setName] = useState(props.name)
-
-    const [timeStart, setStart] = useState(parseInt(props.timeStart))
-    const [timeEnd, setEnd] = useState(parseInt(props.timeEnd))
     const [width, setWidth] = useState(timeEnd-timeStart)
-    const [middle, setMiddle] = useState(timeStart - -(width)/2)
+    const [middle, setMiddle] = useState(timeStart + width/2)
 
-    // keep values in sliders' range
-    if (timeStart >= parseInt(props.length)){
-        const start = parseInt(props.length) - 1
-        slideOne(start);
-        //setWidth(timeEnd-(start));
-        //setMiddle(Math.floor((start + timeEnd)/2))
+    const setName = (name) => {
+        let newTask = props.task
+        newTask.name = name
+        props.setTask(props.task.id, newTask)
     }
-    if (timeEnd > parseInt(props.length)){
-        const length = parseInt(props.length)
-        slideTwo(length);
-        //setWidth(length-timeStart);
-        //setMiddle(Math.floor((timeStart + length)/2))
+    const setStart = (start) => {
+        start = parseInt(start)
+        if (start < 0) { start = 0 }
+        let newTask = props.task
+        newTask.timeStart = start
+        props.setTask(props.task.id, newTask)
+    }
+    const setEnd = (end) => {
+        end = parseInt(end)
+        if (end <= 0) { end = 1 }
+        let newTask = props.task
+        newTask.timeEnd = end
+        props.setTask(props.task.id, newTask)
     }
 
-    if (timeStart < 0){ setStart(0)}
-    if (timeEnd <= 0){ setEnd(1)}
-
-    function nameChange(e){
-        setName(e.target.value)
+    function slideOne(value){
+        setStart(value)
+        setWidth(timeEnd-value)
+        setMiddle(Math.floor((value + props.task.timeEnd)/2))
+    }
+    function slideTwo(value){
+        setWidth(value-timeStart)                     //not happening
+        setMiddle(Math.floor((timeStart + value)/2))  //not happening
+        setEnd(value)
     }
 
-    function slideOne(e){
-        let value = Number.isInteger(e) ?
-                    e : parseInt(e.target.value)
+    const handleSlideOne = (e) => {
+        let value = parseInt(e.target.value)
         if(timeEnd - value <= minGap){
             value = timeEnd - minGap
         }
-        setStart(value)
-        setWidth(timeEnd-value)
-        setMiddle(Math.floor((value + timeEnd)/2))
+        slideOne(value)
     }
-    function slideTwo(e){
-        
-        let value = Number.isInteger(e) ?
-                    e : parseInt(e.target.value)
+
+    const handleSlideTwo = (e) => {
+        let value = parseInt(e.target.value)
         if(value - timeStart <= minGap){
             value = timeStart + minGap 
         }
-        setEnd(value)
-        setWidth(value-timeStart)
-        setMiddle(Math.floor((timeStart + value)/2))
-
+        slideTwo(value)
     }
-    function slideRange(e){
-        const middle = parseInt(e.target.value)
+
+    const handleRange = (e) => {
+        slideRange(e.target.value)
+    }
+
+    function slideRange(value){
+        const middle = parseInt(value)
         const start = middle - Math.floor(width/2)
         const end = start + width
-        if(start >= 0 && end <= props.length){
+        if (start < 0){
+            slideRange(value - start)
+        } else if (end > props.length){
+            slideRange(value - (end - props.length))
+        } else {
             setStart(start)
             setEnd(end)
             setMiddle(middle)
         }
-        
     }
 
     const getBackgroundSize = () => {
         return {
-            left: `${(timeStart * 100) / props.length}%`, 
-            right: `${props.length - (timeEnd * 100) / props.length}%`,
-            width: `${width * 100 / props.length}%`
+            left: `${(timeStart * 100) / length}%`, 
+            right: `${length - (timeEnd * 100) / length}%`,
+            width: `${width * 100 / length}%`
         };
     };
 
@@ -95,33 +105,43 @@ const Task = (props) => {
             <div className={styles.side}>
             <button onClick={props.removeFn}>X</button>
             <input type="text" className={styles.taskName}
-            value={name} onChange={nameChange}/>
+            value={props.task.name} onChange={setName}/>
             </div>
         <div className={styles.track}>
 
             {createRuler()}
-
+            {useEffect(() => {
+                if (timeStart >= length) {
+                    slideOne(length-1);
+                }
+                if (timeEnd > length){
+                    slideTwo(length);
+                }
+            }, [timeStart, timeEnd, length])}
             <div className={styles.rangeTrack}>
                 <div className={styles.rangeFill}
                     style={getBackgroundSize()}>
                         <div className={styles.rangeThumb}></div>
                 </div>
             </div>
-            <input type="range" min="0" max={props.length}
+            <input type="range" min="0" max={length}
+                disabled={false}
                 value={middle} 
                 className={styles.slider}
                 id={styles.range}
-                onChange={slideRange}/>
-            <input type="range" min="0" max={props.length}
-                value={timeStart}
+                onChange={handleRange}/>
+            <input type="range" min="0" max={length}
+                disabled={false}
+                value={props.task.timeStart}
                 className={styles.slider}
                 id={styles.slider1}
-                onChange={slideOne}/>
-            <input type="range" min="0" max={props.length}
-                value={timeEnd}
+                onChange={handleSlideOne}/>
+            <input type="range" min="0" max={length}
+                disabled={false}
+                value={props.task.timeEnd}
                 className={styles.slider}
                 id={styles.slider2}
-                onChange={slideTwo}/>
+                onChange={handleSlideTwo}/>
         </div>
         </div>
     )

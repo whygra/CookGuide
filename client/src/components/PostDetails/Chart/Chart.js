@@ -5,28 +5,48 @@ import styles from './Chart.module.css'
 
 
 const Chart = (props) => {
-    const [length, setLength] = useState(props.length);
-    const [tasks, setTasks] = useState(props.tasks);
+    //const [length, setLength] = useState(props.length);
+    //const [tasks, setTasks] = useState(props.tasks);
+
+    const length = parseInt(props.length)
+
+    const handleAddTask = (e) => {
+        e.preventDefault() // cancel submit
+        addTask()
+    }
 
     const addTask = () => {
         const newTask = {
-            id: tasks.length,
+            id: length,
             name: "",
             timeStart: 0,
             timeEnd: Math.floor(length/4),
             key: new Date().getTime()
         }
-        setTasks([
-            ...tasks,
+    //    setTasks([
+    //        ...tasks,
+    //        newTask
+    //    ])
+        props.setTasks([
+            ...props.tasks,
             newTask
         ])
     }
     function removeTask(key){
-        let newTasks = tasks.filter((item) => item.key !== key);
+        let newTasks = props.tasks.filter((item) => item.key !== key);
         for (let i = 0; i < newTasks.length; i++){
             newTasks[i].id = i;
         }
-        setTasks([...newTasks])
+    //    setTasks([...newTasks])
+        props.setTasks([...newTasks])
+    }
+
+    const setTask = (index, task) => {
+        let newTasks = props.tasks
+        if(index > -1 && index < newTasks.length){
+            newTasks[index] = task
+        }
+        props.setTasks([...newTasks])
     }
 
     const createRuler = () => {
@@ -65,23 +85,23 @@ const Chart = (props) => {
 
     return(
         <div className={styles.chart}>
+        <button onClick={(e) => handleAddTask(e)}>add task</button>
         <div className={styles.rulerWrapper}>
 
             <input type="number" min="5" value={length}
-            onChange={(e)=>setLength(e.target.value)}></input>
+            onChange={(e)=>props.setLength(e.target.value)}></input>
 
             <div className={styles.rulerContainer}>
                 {createRuler()}
             </div>
         </div>
         {
-            tasks.map(el =>
-                <Task key={el.key} name={el.name}
-                timeStart={el.timeStart} timeEnd={el.timeEnd}
+            props.tasks.map(el =>
+                <Task key={el.key} task={el}
                 removeFn={() => removeTask(el.key)}
+                setTask={setTask}
                 length={length}/>)
         }
-        <button onClick={addTask}>add task</button>
         </div>
     )
 }

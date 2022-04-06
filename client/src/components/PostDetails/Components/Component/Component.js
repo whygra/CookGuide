@@ -3,19 +3,25 @@ import styles from './Component.module.css'
 import {useState} from 'react'
 
 const Component = (props) => {
-    const [name, setName] = useState(props.name)
-    const [quantity, setQuantity] = useState(parseInt(props.quantity))
+    //const [name, setName] = useState(props.comp.name)
+    //const [quantity, setQuantity] = useState(parseInt(props.comp.quantity))
 
     const nameChange = (e) => {
-        setName(e.target.value)
+
+    //    setName(e.target.value)
+
+        let newComp = props.comp
+        newComp.name = e.target.value
+        props.setComp(props.comp.id, newComp)
     }
 
     const quantChange = (e) => {
-        setQuantity(e.target.value)
-    }
 
-    const log = () => {
-        console.log(name)
+    //    setQuantity(e.target.value)
+
+        let newComp = props.comp
+        newComp.quantity = e.target.value
+        props.setComp(props.comp.id, newComp)
     }
 
     return(
@@ -23,9 +29,9 @@ const Component = (props) => {
             <button className={styles.rmvBtn} onClick={props.removeFn}>X</button>
             <div className={styles.contents}>
             <input type="text" className={styles.compName}
-            value={name} onChange={nameChange}/>
+            value={props.comp.name} onChange={nameChange}/>
             <input type="number" className={styles.compQuant}
-            value={quantity} onChange={quantChange}/>
+            value={props.comp.quantity} onChange={quantChange}/>
             </div>
         </div>
     )

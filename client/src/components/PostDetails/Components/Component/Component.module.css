@@ -4,8 +4,7 @@
     grid-template-columns: 30px 1fr;
     height: 30px;
     width: 95vmin;
-    background-color:rgb(255, 255, 255);
-    border: 1px solid var(--border-color);
+    background-color: transparent;
     padding: 50px, 40px, 20px, 40px;
 }
 .contents {
@@ -13,9 +12,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color:rgb(255, 255, 255);
+    border-radius: 5px;
 }
 .contents input{
 }
+
 .rmvBtn {
     position: relative;
     width: 100%;

@@ -1,11 +1,18 @@
-*,
-*:before,
-*:after{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+    background-color: rgba(255, 255, 255, 0);
+    color:black;
+    border: none;
 }
+
+input {
+    border: solid 1px var(--outer-border-color);
+    border-radius: 5px;
+}
+
 
 div{
     --chart-side-width: 150px;

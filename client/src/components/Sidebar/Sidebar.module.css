@@ -7,6 +7,10 @@
     transition: 0.1s;
 }
 
+.sidebar *{
+    color: rgb(198, 198, 198);
+}
+
 .sidebar img {
     transition: 0.1s;
     cursor: pointer;

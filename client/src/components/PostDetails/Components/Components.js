@@ -3,43 +3,59 @@ import Component from './Component/Component'
 import {useState} from 'react'
 import styles from './Components.module.css'
 
-const initComponents = [
-    {id: 0, name: "comp", quantity: 1, key: "init0"},
-    {id: 1, name: "comp", quantity: 1, key: "init1"},
-]
-
 const Components = (props) => {
-    const [comps, setComps] = useState(props.comps);
+    //const [comps, setComps] = useState(props.comps);
+
+    const handleAddComp = (e) => {
+        e.preventDefault()
+        addComp()
+    }
 
     const addComp = () => {
         const newComp = {
-            id: comps.length,
+            id: props.comps.length,
             name: "",
             quantity: 1,
             key: new Date().getTime()
         }
-        setComps([
-            ...comps,
+    //    setComps([
+    //        ...props.comps,
+    //        newComp
+    //    ])
+        props.setComps([
+            ...props.comps,
             newComp
         ])
     }
     const removeComp = (key) => {
-        let newComps = comps.filter((item) => item.key !== key);
+        let newComps = props.comps.filter((item) => item.key !== key);
         for (let i = 0; i < newComps.length; i++){
             newComps[i].id = i;
         }
-        setComps([...newComps])
+    //    setComps([...newComps])
+        props.setComps([...newComps])
+    }
+
+    const setComp = (index, comp) => {
+        let newComps = props.comps
+        if (index > -1 && index < newComps.length) {
+            newComps[index] = comp;
+        }
+    //    setComps([...newComps])
+        props.setComps([...newComps])
     }
 
     return(
         <div className={styles.components}>
-        {comps.map(el =>
+        <button onClick={(e) => handleAddComp(e)}>add comp</button>
+
+        {props.comps.map(el =>
             <Component key={el.key}
-            name={el.name} quantity={el.quantity}
+            comp={el}
             removeFn={() => removeComp(el.key)}
-            className={styles.taskWrapper}/>
+            className={styles.taskWrapper}
+            setComp={setComp}/>
         )}
-        <button onClick={addComp}>add comp</button>
 
         </div>
     )

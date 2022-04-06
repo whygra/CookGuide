@@ -19,6 +19,7 @@ const Sidebar = () => {
             Recipes
             <Link to="/">Home</Link>
             <Link to="/new">New</Link>
+            <Link to="/post">Post</Link>
         </div>
     )
 }

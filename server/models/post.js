@@ -3,39 +3,47 @@ import mongoose from 'mongoose'
 const taskSchema = mongoose.Schema({
     title: String,
     startTime: {
-        type: Date,
-        default: new Date("1970-01-01T00:00:00")
+        type: Number,
+        min: 0,
+        default: 0
     },
     endTime: {
-        type: Date,
-        default: new Date("1970-01-01T00:00:00")
+        type: Number,
+        min: 1,
+        default: 5
     }
 })
-const ingredientSchema = mongoose.Schema({
+const componentSchema = mongoose.Schema({
     title: String,
     quantity: {
         type: mongoose.Decimal128,
-        default: 0
+        min: 1,
+        default: 1
     },
 })
-const post = mongoose.Schema({
+const postSchema = mongoose.Schema({
     title: String,
     message: String,
     creator: String,
     tags: [String],
     selectedFile: String,
-    ingredients: [ingredientSchema],
+    components: [componentSchema],
     tasks: [taskSchema],
     likeCount: {
         type: Number,
+        min: 0,
         default: 0
     },
     createdAt: {
         type: Date,
         default: new Date()
+    },
+    length: {
+        type: Number,
+        default: 30
     }
 })
 
-const Post = mongoose.model('Post', post)
+const Post = mongoose.model('Post', postSchema)
 
 export default Post
