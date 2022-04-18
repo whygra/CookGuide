@@ -3,13 +3,8 @@ import styles from './Component.module.css'
 import {useState} from 'react'
 
 const Component = (props) => {
-    //const [name, setName] = useState(props.comp.name)
-    //const [quantity, setQuantity] = useState(parseInt(props.comp.quantity))
 
     const nameChange = (e) => {
-
-    //    setName(e.target.value)
-
         let newComp = props.comp
         newComp.name = e.target.value
         props.setComp(props.comp.id, newComp)

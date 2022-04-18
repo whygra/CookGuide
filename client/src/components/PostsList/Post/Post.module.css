@@ -1,0 +1,8 @@
+.post{
+    display: grid;
+    grid-template-columns: 60px 1fr;
+}
+.image{
+    width: 100%;
+    height: 100%;
+}

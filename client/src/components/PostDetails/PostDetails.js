@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
-import Chart from './Chart/Chart'
-import Components from './Components/Components'
-
 import { useDispatch } from 'react-redux'
 import {useState} from 'react'
 import styles from './PostDetails.module.css'
 import { ImageList } from '@material-ui/core'
 
+import Chart from './Chart/Chart'
+import Components from './Components/Components'
 import image from 'images/dish01.jpg'
+import { createPost } from 'actions/posts'
 
 
 const initTasks = [
@@ -28,8 +28,14 @@ const initPost = {
 
 const PostDetails = (props) => {
 
+    const dispatch = useDispatch()
+
     const [post, setPost] = useState(initPost)
-    const [imageURL, setImageURL] = useState(post.img)
+
+const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(createPost(post))
+}
 
     const handleTitleChange = (e) => {
         e.preventDefault()
@@ -42,12 +48,11 @@ const PostDetails = (props) => {
     
         let reader = new FileReader()
         let file = e.target.files[0]
-    
-        reader.onloadend = () => {
-            setImageURL(reader.result)
-        }
-    
         reader.readAsDataURL(file)
+        console.log(reader.result)
+        reader.onloadend = () => {
+            setPost({...post, img: reader.result})
+        }
     }
 
     const setComps = (comps) => {
@@ -73,15 +78,16 @@ const PostDetails = (props) => {
         <div className="imageInput" hidden={!props.editable}>
             <input type="file" onChange={handleImageChange}/>
         </div>
-        <img className={styles.image} src={imageURL}/>
+        <img className={styles.image} src={post.img}/>
         <div className={styles.postBody}>
         <Components comps={post.comps} setComps={setComps}/>
         <Chart length={post.length} tasks={post.tasks}
         setLength={setLength} setTasks={setTasks}/>
         </div>
         { props.editable ?
-            <button className={styles.submit} type="submit">submit</button> :
-            null }
+            <button className={styles.submit} onClick={handleSubmit}>submit</button> :
+            null
+        }
         </fieldset>
         </form>
         </div>

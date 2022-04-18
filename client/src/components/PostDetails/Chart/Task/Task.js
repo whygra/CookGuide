@@ -12,9 +12,9 @@ const Task = (props) => {
     const [width, setWidth] = useState(timeEnd-timeStart)
     const [middle, setMiddle] = useState(timeStart + width/2)
 
-    const setName = (name) => {
+    const nameChange = (e) => {
         let newTask = props.task
-        newTask.name = name
+        newTask.name = e.target.value
         props.setTask(props.task.id, newTask)
     }
     const setStart = (start) => {
@@ -38,8 +38,8 @@ const Task = (props) => {
         setMiddle(Math.floor((value + props.task.timeEnd)/2))
     }
     function slideTwo(value){
-        setWidth(value-timeStart)                     //not happening
-        setMiddle(Math.floor((timeStart + value)/2))  //not happening
+        setWidth(value-timeStart)                   
+        setMiddle(Math.floor((timeStart + value)/2))
         setEnd(value)
     }
 
@@ -105,17 +105,17 @@ const Task = (props) => {
             <div className={styles.side}>
             <button onClick={props.removeFn}>X</button>
             <input type="text" className={styles.taskName}
-            value={props.task.name} onChange={setName}/>
+            value={props.task.name} onChange={nameChange}/>
             </div>
         <div className={styles.track}>
 
             {createRuler()}
             {useEffect(() => {
-                if (timeStart >= length) {
-                    slideOne(length-1);
-                }
                 if (timeEnd > length){
                     slideTwo(length);
+                }
+                if (timeStart >= timeEnd) {
+                    slideOne(timeEnd-1);
                 }
             }, [timeStart, timeEnd, length])}
             <div className={styles.rangeTrack}>
