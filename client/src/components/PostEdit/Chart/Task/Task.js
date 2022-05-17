@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './Task.module.css'
 import {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 let minGap = 1;
 

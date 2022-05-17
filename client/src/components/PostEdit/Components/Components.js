@@ -1,10 +1,12 @@
 import React from 'react'
 import Component from './Component/Component'
 import {useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import styles from './Components.module.css'
 
 const Components = (props) => {
-    //const [comps, setComps] = useState(props.comps);
+    const comps = useSelector((state) => state.editablePost).comps
 
     const handleAddComp = (e) => {
         e.preventDefault()
@@ -18,10 +20,7 @@ const Components = (props) => {
             quantity: 1,
             key: new Date().getTime()
         }
-    //    setComps([
-    //        ...props.comps,
-    //        newComp
-    //    ])
+
         props.setComps([
             ...props.comps,
             newComp
@@ -32,7 +31,6 @@ const Components = (props) => {
         for (let i = 0; i < newComps.length; i++){
             newComps[i].id = i;
         }
-    //    setComps([...newComps])
         props.setComps([...newComps])
     }
 
@@ -41,15 +39,14 @@ const Components = (props) => {
         if (index > -1 && index < newComps.length) {
             newComps[index] = comp;
         }
-    //    setComps([...newComps])
         props.setComps([...newComps])
     }
 
     return(
         <div className={styles.components}>
-        <button onClick={(e) => handleAddComp(e)}>add comp</button>
+        <button hidden={!props.editable} onClick={(e) => handleAddComp(e)}>add comp</button>
 
-        {props.comps.map(el =>
+        {comps.map(el =>
             <Component key={el.key}
             comp={el}
             removeFn={() => removeComp(el.key)}

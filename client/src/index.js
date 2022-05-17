@@ -11,12 +11,10 @@ import App from './App'
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
 ReactDOM.render(
-    <React.StrictMode>
     <Provider store={store}>
     <BrowserRouter>
         <App />
     </BrowserRouter>
-    </Provider>
-    </React.StrictMode>,
+    </Provider>,
     document.getElementById('root')
 )

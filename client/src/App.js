@@ -6,7 +6,8 @@ import { getPosts } from './actions/posts'
 import './App.css'
 import Sidebar from './components/Sidebar/Sidebar'
 import PostsList from './components/PostsList/PostsList'
-import PostDetails from './components/PostDetails/PostDetails'
+import PostView from './components/PostView/PostView'
+import PostEdit from './components/PostEdit/PostEdit'
 
 const App = () => {
     const dispatch = useDispatch()
@@ -21,8 +22,9 @@ const App = () => {
             <div className="pageContent">
             <Routes>
                 <Route path="/" element={<PostsList />}/>
-                <Route path="/post" element={<PostDetails editable={false} />}/>
-                <Route path="/new" element={<PostDetails editable={true} />}/>
+                <Route path="/view" element={<PostView />}/>
+                <Route path="/edit" element={<PostEdit new={false}/>}/>
+                <Route path="/new" element={<PostEdit new={true}/>}/>
             </Routes>
             </div>
         </div>

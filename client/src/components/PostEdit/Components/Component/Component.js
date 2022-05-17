@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './Component.module.css'
 import {useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const Component = (props) => {
 
@@ -11,9 +13,6 @@ const Component = (props) => {
     }
 
     const quantChange = (e) => {
-
-    //    setQuantity(e.target.value)
-
         let newComp = props.comp
         newComp.quantity = e.target.value
         props.setComp(props.comp.id, newComp)

@@ -38,7 +38,7 @@ const postSchema = mongoose.Schema({
         type: Date,
         default: new Date()
     },
-    length: {
+    time: {
         type: Number,
         default: 30
     }

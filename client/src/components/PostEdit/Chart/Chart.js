@@ -1,17 +1,18 @@
 import React from 'react'
 import Task from './Task/Task'
 import {useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import styles from './Chart.module.css'
 
 
 const Chart = (props) => {
-    //const [length, setLength] = useState(props.length);
-    //const [tasks, setTasks] = useState(props.tasks);
+    const length = useSelector((state) => state.editablePost).length
 
-    const length = parseInt(props.length)
+    const tasks = useSelector((state) => state.editablePost).tasks
 
     const handleAddTask = (e) => {
-        e.preventDefault() // cancel submit
+        e.preventDefault()
         addTask()
     }
 
@@ -23,10 +24,7 @@ const Chart = (props) => {
             timeEnd: Math.floor(length/4),
             key: new Date().getTime()
         }
-    //    setTasks([
-    //        ...tasks,
-    //        newTask
-    //    ])
+
         props.setTasks([
             ...props.tasks,
             newTask
@@ -37,7 +35,6 @@ const Chart = (props) => {
         for (let i = 0; i < newTasks.length; i++){
             newTasks[i].id = i;
         }
-    //    setTasks([...newTasks])
         props.setTasks([...newTasks])
     }
 
@@ -85,7 +82,7 @@ const Chart = (props) => {
 
     return(
         <div className={styles.chart}>
-        <button onClick={(e) => handleAddTask(e)}>add task</button>
+        <button hidden={!props.editable} onClick={(e) => handleAddTask(e)}>add task</button>
         <div className={styles.rulerWrapper}>
 
             <input type="number" min="5" value={length}
@@ -96,7 +93,7 @@ const Chart = (props) => {
             </div>
         </div>
         {
-            props.tasks.map(el =>
+            tasks.map(el =>
                 <Task key={el.key} task={el}
                 removeFn={() => removeTask(el.key)}
                 setTask={setTask}

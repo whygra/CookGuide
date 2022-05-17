@@ -1,10 +1,14 @@
+import { StylesContext } from '@material-ui/styles'
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-const Post = () => {
+import styles from './Post.module.css'
+
+const Post = (props) => {
     return(
-        <div>
-        <div>Post.img</div>
-        <h1>Post.title</h1>
+        <div className={styles.post}>
+            <div className={styles.imgContainer}><img src={props.post.img}/></div>
+            <Link to={`/view/?post=${props.post._id}`}><h1>{props.post.title}</h1></Link>
         </div>
     )
 }

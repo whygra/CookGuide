@@ -8,9 +8,9 @@ const PostsList = () => {
 
     return(
         <div>
-            <h1>Posts List</h1>
-            <Post/>
-            <Post/>
+            {posts.map((post) => (
+                <Post key={post._id} post={post} />
+            ))}
         </div>
     )
 }
