@@ -19,7 +19,7 @@ const PostView = (props) => {
 
     const post = useSelector((state) => state.readablePost)
 
-    if (post._id != postId){
+    if (post._id !== postId){
         return(<h1>Loading...</h1>)
     }
     return(

@@ -40,9 +40,8 @@ const Task = ({task}) => {
 
     return(
         <div className={styles.wrapper}>
-            <div className={styles.side}>
-            <input type="text" className={styles.taskName}
-            value={task.name}/>
+            <div type="text" className={styles.title}>
+                {task.title}
             </div>
         <div className={styles.track}>
 

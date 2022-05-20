@@ -1,11 +1,11 @@
 import image from 'images/9th.png'
 
 const initTasks = [
-    {id: 0, name: "", timeStart: 0, timeEnd: 15, key: "init0"},
+    {title: "", timeStart: 0, timeEnd: 15, key: "init0"},
 ]
 
 const initComponents = [
-    {id: 0, name: "", quantity: 0, key: "init0"},
+    {title: "", quantity: 0, key: "init0"},
 ]
 
 const initPost = {

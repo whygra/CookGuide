@@ -14,13 +14,8 @@ const PostEdit = (props) => {
     const postId = searchParams.get("post");
     
     const dispatch = useDispatch()
-    // set redux state
-    useEffect(()=> {
-        dispatch(setEditable(postId))
-    }, [])
 
     const post = useSelector((state) => state.editablePost)
-    console.log(post)
 
     const handleTitleChange = (e) => {
         e.preventDefault()

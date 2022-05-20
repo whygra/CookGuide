@@ -16,7 +16,7 @@ const taskSchema = mongoose.Schema({
 const componentSchema = mongoose.Schema({
     title: String,
     quantity: {
-        type: mongoose.Decimal128,
+        type: Number,
         min: 1,
         default: 1
     },

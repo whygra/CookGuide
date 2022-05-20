@@ -6,8 +6,7 @@ import styles from './Components.module.css'
 
 const Components = () => {
 
-    const comps = useSelector((state) => state.editablePost).comps
-
+    const comps = useSelector((state) => state.readablePost).comps
     return(
         <div className={styles.components}>
 

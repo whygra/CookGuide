@@ -7,7 +7,6 @@ import { setComps } from 'actions/editablePost'
 
 
 const Component = ({comp}) => {
-
     const dispatch = useDispatch()
 
     const comps = useSelector((state) => state.editablePost).comps
@@ -28,9 +27,9 @@ const Component = ({comp}) => {
         dispatch(setComps([...newComps]))
     }
 
-    const nameChange = (e) => {
+    const titleChange = (e) => {
         let newComp = comp
-        newComp.name = e.target.value
+        newComp.title = e.target.value
         setComp(comp.id, newComp)
     }
 
@@ -45,7 +44,7 @@ const Component = ({comp}) => {
             <button className={styles.rmvBtn} onClick={removeComp}>X</button>
             <div className={styles.contents}>
             <input type="text" className={styles.compName}
-            value={comp.name} onChange={nameChange}/>
+            value={comp.title} onChange={titleChange}/>
             <input type="number" className={styles.compQuant}
             value={comp.quantity} onChange={quantChange}/>
             </div>

@@ -26,7 +26,7 @@ const Chart = (props) => {
     const addTask = () => {
         const newTask = {
             id: tasks.length,
-            name: "",
+            title: "",
             timeStart: 0,
             timeEnd: Math.floor(time/4),
             key: new Date().getTime()

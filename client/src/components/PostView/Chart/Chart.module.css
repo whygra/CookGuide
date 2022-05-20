@@ -8,8 +8,7 @@
 
 .rulerWrapper{
     position: relative;
-    display: grid;
-    grid-template-columns: var(--chart-side-width) 1fr;
+
     height: 30px;
     width: 95vmin;
     background-color:rgb(255, 255, 255);

@@ -11,7 +11,6 @@ const Components = () => {
     const dispatch = useDispatch()
 
     const comps = useSelector((state) => state.editablePost).comps
-    console.log(comps)
 
     const handleAddComp = (e) => {
         e.preventDefault()
@@ -21,7 +20,7 @@ const Components = () => {
     const addComp = () => {
         const newComp = {
             id: comps.length,
-            name: "",
+            title: "",
             quantity: 1,
             key: new Date().getTime()
         }

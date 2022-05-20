@@ -6,7 +6,7 @@ import styles from './Chart.module.css'
 
 const Chart = (props) => {
 
-    const tasks = useSelector((state) => state.editablePost).tasks
+    const tasks = useSelector((state) => state.readablePost).tasks
 
     const time = parseInt(props.time)
     
@@ -47,9 +47,6 @@ const Chart = (props) => {
     return(
         <div className={styles.chart}>
         <div className={styles.rulerWrapper}>
-
-            <input type="number" min="5" value={time}></input>
-
             <div className={styles.rulerContainer}>
                 {createRuler()}
             </div>

@@ -38,9 +38,9 @@ const Task = ({task}) => {
 
     }
 
-    const nameChange = (e) => {
+    const titleChange = (e) => {
         let newTask = task
-        newTask.name = e.target.value
+        newTask.title = e.target.value
         setTask(task.id, newTask)
     }
     const setStart = (start) => {
@@ -131,7 +131,7 @@ const Task = ({task}) => {
             <div className={styles.side}>
             <button onClick={removeTask}>X</button>
             <input type="text" className={styles.taskName}
-            value={task.name} onChange={nameChange}/>
+            value={task.title} onChange={titleChange}/>
             </div>
         <div className={styles.track}>
 
