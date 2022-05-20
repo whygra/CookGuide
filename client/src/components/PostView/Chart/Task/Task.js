@@ -1,13 +1,15 @@
 import React from 'react'
 import styles from './Task.module.css'
 import {useState, useEffect} from 'react'
+import { useSelector } from 'react-redux'
 
 let minGap = 1;
 
-const Task = (props) => {
-    const time = parseInt(props.time)
-    const timeStart = parseInt(props.task.timeStart)
-    const timeEnd = parseInt(props.task.timeEnd)
+const Task = ({task}) => {
+
+    const time = parseInt(useSelector((state) => state.editablePost).time)
+    const timeStart = parseInt(task.timeStart)
+    const timeEnd = parseInt(task.timeEnd)
 
     const [width, setWidth] = useState(timeEnd-timeStart)
     const [middle, setMiddle] = useState(timeStart + width/2)
@@ -25,7 +27,7 @@ const Task = (props) => {
     const createRuler = () => {
         var lines = [];
         var className = styles.line1;
-        for(let i = 0; i <= props.time; i++){
+        for(let i = 0; i <= time; i++){
             className = i % 60 === 0 ? styles.line60 :
                         i % 30 === 0 ? styles.line30 :
                         i % 5 === 0 ? styles.line5:
@@ -39,9 +41,8 @@ const Task = (props) => {
     return(
         <div className={styles.wrapper}>
             <div className={styles.side}>
-            <button>X</button>
             <input type="text" className={styles.taskName}
-            value={props.task.name}/>
+            value={task.name}/>
             </div>
         <div className={styles.track}>
 
@@ -60,12 +61,12 @@ const Task = (props) => {
                 id={styles.range}/>
             <input type="range" min="0" max={time}
                 disabled={false}
-                value={props.task.timeStart}
+                value={task.timeStart}
                 className={styles.slider}
                 id={styles.slider1}/>
             <input type="range" min="0" max={time}
                 disabled={false}
-                value={props.task.timeEnd}
+                value={task.timeEnd}
                 className={styles.slider}
                 id={styles.slider2}/>
         </div>

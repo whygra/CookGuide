@@ -1,10 +1,13 @@
 import React from 'react'
 import Task from './Task/Task'
-import {useState} from 'react'
+import { useSelector } from 'react-redux'
 import styles from './Chart.module.css'
 
 
 const Chart = (props) => {
+
+    const tasks = useSelector((state) => state.editablePost).tasks
+
     const time = parseInt(props.time)
     
     const createRuler = () => {
@@ -52,9 +55,8 @@ const Chart = (props) => {
             </div>
         </div>
         {
-            props.tasks.map(el =>
-                <Task key={el.key} task={el}
-                time={time}/>)
+            tasks.map(el =>
+                <Task key={el.key} task={el}/>)
         }
         </div>
     )

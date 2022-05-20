@@ -10,6 +10,15 @@ export const setEditable = (id) => async (dispatch) => {
     }
 }
 
+export const resetEditable = () => async (dispatch) => {
+    try {
+        const action = { type: 'RESET_EDITABLE' }
+        dispatch(action)
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 export const setTitle = (title) => async (dispatch) => {
     try {
         const action = { type: 'SET_TITLE', payload: title }

@@ -19,9 +19,7 @@ const PostView = (props) => {
 
     const post = useSelector((state) => state.readablePost)
 
-    console.log(Object.keys(post).length)
-
-    if (Object.keys(post).length == 0){
+    if (post._id != postId){
         return(<h1>Loading...</h1>)
     }
     return(

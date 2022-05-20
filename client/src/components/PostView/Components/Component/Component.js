@@ -6,7 +6,6 @@ const Component = (props) => {
 
     return(
         <div className={styles.component}>
-            <button className={styles.rmvBtn}>X</button>
             <div className={styles.contents}>
             <input type="text" className={styles.compName}
             value={props.comp.name}/>

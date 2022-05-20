@@ -1,14 +1,17 @@
 import React from 'react'
 import Task from './Task/Task'
-import {useState} from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { setTasks, setTime } from 'actions/editablePost'
 import styles from './Chart.module.css'
 
 
 const Chart = (props) => {
-    const length = useSelector((state) => state.editablePost).length
 
+    const dispatch = useDispatch()
+
+    const time = useSelector((state) => state.editablePost).time
     const tasks = useSelector((state) => state.editablePost).tasks
 
     const handleAddTask = (e) => {
@@ -16,42 +19,30 @@ const Chart = (props) => {
         addTask()
     }
 
+    const handleTimeChange = (e) => {
+        dispatch(setTime(e.target.value))
+    }
+
     const addTask = () => {
         const newTask = {
-            id: length,
+            id: tasks.length,
             name: "",
             timeStart: 0,
-            timeEnd: Math.floor(length/4),
+            timeEnd: Math.floor(time/4),
             key: new Date().getTime()
         }
 
-        props.setTasks([
-            ...props.tasks,
+        dispatch(setTasks([
+            ...tasks,
             newTask
-        ])
+        ]))
     }
-    function removeTask(key){
-        let newTasks = props.tasks.filter((item) => item.key !== key);
-        for (let i = 0; i < newTasks.length; i++){
-            newTasks[i].id = i;
-        }
-        props.setTasks([...newTasks])
-    }
-
-    const setTask = (index, task) => {
-        let newTasks = props.tasks
-        if(index > -1 && index < newTasks.length){
-            newTasks[index] = task
-        }
-        props.setTasks([...newTasks])
-    }
-
+    
     const createRuler = () => {
         var lines = [];
         var period = 1;
         var className = styles.scale1;
-        
-        for(let i = 0; i <= length; i++){
+        for(let i = 0; i <= time; i++){
             var style = {
                 color: "black"
             }
@@ -71,7 +62,7 @@ const Chart = (props) => {
                 period = 1;
                 className = styles.scale1;
             }
-            if(length / period > 20){
+            if(time / period > 20){
                 style.color = "transparent"
             }
            
@@ -82,11 +73,11 @@ const Chart = (props) => {
 
     return(
         <div className={styles.chart}>
-        <button hidden={!props.editable} onClick={(e) => handleAddTask(e)}>add task</button>
+        <button onClick={(e) => handleAddTask(e)}>add task</button>
         <div className={styles.rulerWrapper}>
 
-            <input type="number" min="5" value={length}
-            onChange={(e)=>props.setLength(e.target.value)}></input>
+            <input type="number" min="5" value={time}
+            onChange={handleTimeChange}></input>
 
             <div className={styles.rulerContainer}>
                 {createRuler()}
@@ -94,10 +85,7 @@ const Chart = (props) => {
         </div>
         {
             tasks.map(el =>
-                <Task key={el.key} task={el}
-                removeFn={() => removeTask(el.key)}
-                setTask={setTask}
-                length={length}/>)
+                <Task key={el.key} task={el}/>)
         }
         </div>
     )

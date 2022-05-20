@@ -2,12 +2,12 @@ import mongoose from 'mongoose'
 
 const taskSchema = mongoose.Schema({
     title: String,
-    startTime: {
+    timeStart: {
         type: Number,
         min: 0,
         default: 0
     },
-    endTime: {
+    timeEnd: {
         type: Number,
         min: 1,
         default: 5
@@ -27,7 +27,7 @@ const postSchema = mongoose.Schema({
     creator: String,
     tags: [String],
     img: String,
-    components: [componentSchema],
+    comps: [componentSchema],
     tasks: [taskSchema],
     likeCount: {
         type: Number,

@@ -1,7 +1,5 @@
 .component {
     position: relative;
-    display: grid;
-    grid-template-columns: 30px 1fr;
     height: 30px;
     width: 95vmin;
     background-color: transparent;

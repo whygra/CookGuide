@@ -1,6 +1,6 @@
 .post{
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 100px 200px 10px;
     height: 80px;
 }
 .imgContainer{
@@ -14,4 +14,13 @@
 .imgContainer img{
     height: 70px;
     width: auto;
+}
+
+.title{
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+.removeBtn{
+
 }

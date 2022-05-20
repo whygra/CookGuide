@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {useState} from 'react'
+
 import styles from './PostEdit.module.css'
 import { useSearchParams } from 'react-router-dom';
 
 import Chart from './Chart/Chart'
 import Components from './Components/Components'
-import { createPost, updatePost } from 'actions/posts'
 import { setEditable, setTitle, setImg } from 'actions/editablePost'
 
 const PostEdit = (props) => {
@@ -16,17 +15,12 @@ const PostEdit = (props) => {
     
     const dispatch = useDispatch()
     // set redux state
-    dispatch(setEditable(postId))
+    useEffect(()=> {
+        dispatch(setEditable(postId))
+    }, [])
 
     const post = useSelector((state) => state.editablePost)
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        !props.new ? 
-            dispatch(updatePost(post))
-            :
-            dispatch(createPost(post))
-    }
+    console.log(post)
 
     const handleTitleChange = (e) => {
         e.preventDefault()
@@ -48,10 +42,7 @@ const PostEdit = (props) => {
         return(<h1>Loading...</h1>)
     }
     return(
-        <div className={styles.postDetails}>
-        
-        <form className={styles.form}>
-        <fieldset disabled={!props.editable}>
+        <>
         <input
         type="text" value={post.title} className={styles.title}
         onChange={handleTitleChange}/>
@@ -64,12 +55,7 @@ const PostEdit = (props) => {
         <Components/>
         <Chart/>
         </div>
-
-        <button className={styles.submit} onClick={handleSubmit}>submit</button>
-
-        </fieldset>
-        </form>
-        </div>
+        </>
     )
 }
 

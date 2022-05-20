@@ -1,14 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
 import Component from './Component/Component'
-import {useState} from 'react'
 import styles from './Components.module.css'
 
-const Components = (props) => {
+const Components = () => {
+
+    const comps = useSelector((state) => state.editablePost).comps
 
     return(
         <div className={styles.components}>
 
-        {props.comps.map(el =>
+        {comps.map(el =>
             <Component key={el.key}
             comp={el}
             className={styles.taskWrapper}/>

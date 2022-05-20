@@ -3,41 +3,65 @@ import styles from './Task.module.css'
 import {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { setTasks } from 'actions/editablePost'
 
-let minGap = 1;
 
-const Task = (props) => {
-    const length = parseInt(props.length)
-    const timeStart = parseInt(props.task.timeStart)
-    const timeEnd = parseInt(props.task.timeEnd)
+const minGap = 1;
+
+const Task = ({task}) => {
+
+    const dispatch = useDispatch()
+
+    const tasks = useSelector((state) => state.editablePost.tasks)
+
+    const time = parseInt(useSelector((state) => state.editablePost.time))
+    const timeStart = parseInt(task.timeStart)
+    const timeEnd = parseInt(task.timeEnd)
 
     const [width, setWidth] = useState(timeEnd-timeStart)
     const [middle, setMiddle] = useState(timeStart + width/2)
 
+    const removeTask = () => {
+        let newTasks = tasks.filter((item) => item.key !== task.key);
+        for (let i = 0; i < newTasks.length; i++){
+            newTasks[i].id = i;
+        }
+        dispatch(setTasks(newTasks))
+    }
+
+    const setTask = (index, task) => {
+        let newTasks = tasks
+        if(index > -1 && index < newTasks.length){
+            newTasks[index] = task
+        }
+        dispatch(setTasks(newTasks))
+
+    }
+
     const nameChange = (e) => {
-        let newTask = props.task
+        let newTask = task
         newTask.name = e.target.value
-        props.setTask(props.task.id, newTask)
+        setTask(task.id, newTask)
     }
     const setStart = (start) => {
         start = parseInt(start)
         if (start < 0) { start = 0 }
-        let newTask = props.task
+        let newTask = task
         newTask.timeStart = start
-        props.setTask(props.task.id, newTask)
+        setTask(task.id, newTask)
     }
     const setEnd = (end) => {
         end = parseInt(end)
         if (end <= 0) { end = 1 }
-        let newTask = props.task
+        let newTask = task
         newTask.timeEnd = end
-        props.setTask(props.task.id, newTask)
+        setTask(task.id, newTask)
     }
 
     function slideOne(value){
         setStart(value)
         setWidth(timeEnd-value)
-        setMiddle(Math.floor((value + props.task.timeEnd)/2))
+        setMiddle(Math.floor((value + task.timeEnd)/2))
     }
     function slideTwo(value){
         setWidth(value-timeStart)                   
@@ -71,8 +95,8 @@ const Task = (props) => {
         const end = start + width
         if (start < 0){
             slideRange(value - start)
-        } else if (end > props.length){
-            slideRange(value - (end - props.length))
+        } else if (end > time){
+            slideRange(value - (end - time))
         } else {
             setStart(start)
             setEnd(end)
@@ -82,16 +106,16 @@ const Task = (props) => {
 
     const getBackgroundSize = () => {
         return {
-            left: `${(timeStart * 100) / length}%`, 
-            right: `${length - (timeEnd * 100) / length}%`,
-            width: `${width * 100 / length}%`
+            left: `${(timeStart * 100) / time}%`, 
+            right: `${time - (timeEnd * 100) / time}%`,
+            width: `${width * 100 / time}%`
         };
     };
 
     const createRuler = () => {
         var lines = [];
         var className = styles.line1;
-        for(let i = 0; i <= props.length; i++){
+        for(let i = 0; i <= time; i++){
             className = i % 60 === 0 ? styles.line60 :
                         i % 30 === 0 ? styles.line30 :
                         i % 5 === 0 ? styles.line5:
@@ -105,42 +129,42 @@ const Task = (props) => {
     return(
         <div className={styles.wrapper}>
             <div className={styles.side}>
-            <button onClick={props.removeFn}>X</button>
+            <button onClick={removeTask}>X</button>
             <input type="text" className={styles.taskName}
-            value={props.task.name} onChange={nameChange}/>
+            value={task.name} onChange={nameChange}/>
             </div>
         <div className={styles.track}>
 
             {createRuler()}
             {useEffect(() => {
-                if (timeEnd > length){
-                    slideTwo(length);
+                if (timeEnd > time){
+                    slideTwo(time);
                 }
                 if (timeStart >= timeEnd) {
                     slideOne(timeEnd-1);
                 }
-            }, [timeStart, timeEnd, length])}
+            }, [timeStart, timeEnd, time])}
             <div className={styles.rangeTrack}>
                 <div className={styles.rangeFill}
                     style={getBackgroundSize()}>
                         <div className={styles.rangeThumb}></div>
                 </div>
             </div>
-            <input type="range" min="0" max={length}
+            <input type="range" min="0" max={time}
                 disabled={false}
                 value={middle} 
                 className={styles.slider}
                 id={styles.range}
                 onChange={handleRange}/>
-            <input type="range" min="0" max={length}
+            <input type="range" min="0" max={time}
                 disabled={false}
-                value={props.task.timeStart}
+                value={task.timeStart}
                 className={styles.slider}
                 id={styles.slider1}
                 onChange={handleSlideOne}/>
-            <input type="range" min="0" max={length}
+            <input type="range" min="0" max={time}
                 disabled={false}
-                value={props.task.timeEnd}
+                value={task.timeEnd}
                 className={styles.slider}
                 id={styles.slider2}
                 onChange={handleSlideTwo}/>
