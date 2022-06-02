@@ -11,10 +11,15 @@ const Component = ({comp}) => {
 
     const comps = useSelector((state) => state.editablePost).comps
 
+    const handleRmvComp = (e) => {
+        e.preventDefault()
+        removeComp()
+    }
+
     const removeComp = () => {
         let newComps = comps
         for (let g=0; g<newComps.length; g++){ // for each group
-            newComps[g].comps.filter((item) => item.key !== comp.key)
+            newComps[g].comps = newComps[g].comps.filter((item) => item.key !== comp.key)
         }
         dispatch(setComps([...newComps]))
     }
@@ -51,7 +56,7 @@ const Component = ({comp}) => {
 
     return(
         <div className={styles.component}>
-            <button className={styles.rmvBtn} onClick={removeComp}>X</button>
+            <button className={styles.rmvBtn} onClick={handleRmvComp}>X</button>
             <div className={styles.contents}>
             <input type="text" className={styles.compName}
             value={comp.title} onChange={titleChange}/>

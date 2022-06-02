@@ -63,7 +63,7 @@ const Group = ({group}) => {
     }
 
     const rmvGroup = () => {
-        const newComps = comps.filter(g => g.key === group.key)
+        const newComps = comps.filter(g => g.key !== group.key)
 
         dispatch(setComps(
             newComps
@@ -72,7 +72,7 @@ const Group = ({group}) => {
 
     return(
         <div className={styles.components}>
-        <button className={styles.rmvBtn} onClick={(e) => handleAddComp(e)}>X</button>
+        <button className={styles.rmvBtn} onClick={(e) => handleRmvComp(e)}>X</button>
         <input type="text" value={group.title}
         onChange={(e) => setTitle(e.target.value)}/>
         <button onClick={(e) => handleAddComp(e)}>add comp</button>
