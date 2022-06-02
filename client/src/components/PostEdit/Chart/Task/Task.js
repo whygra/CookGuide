@@ -35,7 +35,6 @@ const Task = ({task}) => {
             newTasks[index] = task
         }
         dispatch(setTasks(newTasks))
-
     }
 
     const titleChange = (e) => {

@@ -18,7 +18,7 @@ const PostCreate = () => {
     }, [])
 
     const post = useSelector((state) => state.editablePost)
-    console.log("dfhstrt")
+    console.log(post)
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(createPost(post))

@@ -55,7 +55,7 @@ const Component = ({comp}) => {
             <input type="number" className={styles.compQuant}
             value={comp.quantity} onChange={quantChange}/>
             </div>
-            <select className={styles.select} onChange={unitChange}>
+            <select value={comp.unit} className={styles.select} onChange={unitChange}>
                 <option>g</option>
                 <option>piece</option>
                 <option>t-sp</option>

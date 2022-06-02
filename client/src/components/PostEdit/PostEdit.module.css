@@ -11,9 +11,6 @@
 .postDetails input[type=text], input[type=number]{
     background-color: rgb(255, 255, 255);
 }
-.postDetails button{
-
-}
 
 .title {
     margin-top: 20px;
