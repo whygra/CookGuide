@@ -1,5 +1,5 @@
 import React from 'react'
-import Component from './Component/Component'
+import Group from './Group'
 import {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -12,32 +12,36 @@ const Components = () => {
 
     const comps = useSelector((state) => state.editablePost).comps
 
-    const handleAddComp = (e) => {
+    const handleAddGroup = (e) => {
         e.preventDefault()
-        addComp()
+        addGroup()
     }
 
-    const addComp = () => {
-        const newComp = {
-            id: comps.length,
+    const addGroup = () => {
+        const newGroup = {
             title: "",
-            quantity: 1,
-            unit: "g",
+            comps: [{
+                title: "",
+                quantity: 1,
+                unit: "g",
+                key: Date.now()
+            }],
+            key: Date.now()
         }
 
         dispatch(setComps([
             ...comps,
-            newComp
+            newGroup
         ]))
     }
 
     return(
         <div className={styles.components}>
-        <button onClick={(e) => handleAddComp(e)}>add comp</button>
+        <button onClick={(e) => handleAddGroup(e)}>add group</button>
 
         {comps.map(el =>
-            <Component key={el._id}
-            comp={el}
+            <Group key={el.key}
+            group={el}
             className={styles.taskWrapper}/>
         )}
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import Component from './Component/Component'
+import Group from './Group'
 import styles from './Components.module.css'
 
 const Components = () => {
@@ -10,9 +10,8 @@ const Components = () => {
         <div className={styles.components}>
 
         {comps.map(el =>
-            <Component key={el._id}
-            comp={el}
-            className={styles.taskWrapper}/>
+            <Group key={el._id}
+            group={el}/>
         )}
 
         </div>

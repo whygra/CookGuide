@@ -20,7 +20,13 @@ const componentSchema = mongoose.Schema({
         min: 1,
         default: 1
     },
-    unit: String
+    unit: String,
+    key: String
+})
+const groupSchema = mongoose.Schema({
+    title: String,
+    comps: [componentSchema],
+    key: String
 })
 const postSchema = mongoose.Schema({
     title: String,
@@ -28,7 +34,7 @@ const postSchema = mongoose.Schema({
     creator: String,
     tags: [String],
     img: String,
-    comps: [componentSchema],
+    comps: [groupSchema],
     tasks: [taskSchema],
     likeCount: {
         type: Number,

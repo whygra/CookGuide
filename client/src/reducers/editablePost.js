@@ -3,10 +3,12 @@ import image from 'images/9th.png'
 const initPost = {
     title: "", img: image, time: 60,
     comps: [
-        {title: "", quantity: 1, unit: "g", _id: "init0"},
+        {title: "group", comps: [
+            {title: "", quantity: 1, unit: "g", key: Date.now()},
+        ], key: Date.now()}
     ],
     tasks:[
-        {title: "", timeStart: 0, timeEnd: 15, _id: "init0"},
+        {title: "", timeStart: 0, timeEnd: 15, key: Date.now()},
     ]
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Component.module.css'
-import {useState} from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setComps } from 'actions/editablePost'
@@ -12,38 +12,41 @@ const Component = ({comp}) => {
     const comps = useSelector((state) => state.editablePost).comps
 
     const removeComp = () => {
-        let newComps = comps.filter((item) => item.key !== comp.key);
-        for (let i = 0; i < newComps.length; i++){
-            newComps[i].id = i;
+        let newComps = comps
+        for (let g=0; g<newComps.length; g++){ // for each group
+            newComps[g].comps.filter((item) => item.key !== comp.key)
         }
         dispatch(setComps([...newComps]))
     }
 
-    const setComp = (index, comp) => {
+    const setComp = (comp) => {
         let newComps = comps
-        if (index >= 0 && index < newComps.length) {
-            newComps[index] = comp;
+        for (let g=0; g<newComps.length; g++){
+            for(let c=0; c<newComps[g].comps.length; c++){
+                if (newComps[g].comps[c].key === comp.key){
+                    newComps[g].comps[c] = comp
+                }
+            }
         }
-
         dispatch(setComps([...newComps]))
     }
 
     const titleChange = (e) => {
         let newComp = comp
         newComp.title = e.target.value
-        setComp(comp.id, newComp)
+        setComp(newComp)
     }
 
     const quantChange = (e) => {
         let newComp = comp
         newComp.quantity = e.target.value
-        setComp(comp.id, newComp)
+        setComp(newComp)
     }
 
     const unitChange = (e) => {
         let newComp = comp
         newComp.unit = e.target.value
-        setComp(comp.id, newComp)
+        setComp(newComp)
     }
 
     return(
@@ -53,7 +56,7 @@ const Component = ({comp}) => {
             <input type="text" className={styles.compName}
             value={comp.title} onChange={titleChange}/>
             <input type="number" className={styles.compQuant}
-            value={comp.quantity} onChange={quantChange}/>
+            value={comp.quantity} min={1} onChange={quantChange}/>
             </div>
             <select value={comp.unit} className={styles.select} onChange={unitChange}>
                 <option>g</option>
