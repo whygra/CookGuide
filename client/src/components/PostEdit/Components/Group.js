@@ -12,13 +12,15 @@ const Group = ({group}) => {
 
     const comps = useSelector((state) => state.editablePost).comps
 
-    const setGroup = (group) => {
+    const setGroup = (newGroup) => {
+
         const newComps = comps
-        const ind = newComps.findIndex(g => g.key === group.key)
-        newComps[ind] = group
-        dispatch(setComps([
+        const ind = newComps.findIndex(g => g.key === newGroup.key)
+        newComps[ind] = newGroup
+
+        dispatch(setComps(
             newComps
-        ]))
+        ))
     }
 
     const setTitle = (value) =>{
@@ -53,13 +55,7 @@ const Group = ({group}) => {
             ]
         }
 
-        const newComps = comps
-        const ind = newComps.findIndex(g => g.key === newGroup.key)
-        newComps[ind] = newGroup
-
-        dispatch(setComps(
-            newComps
-        ))
+        setGroup(newGroup)
     }
 
     const rmvGroup = () => {
