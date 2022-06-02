@@ -3,6 +3,7 @@ import styles from './Component.module.css'
 import {useState} from 'react'
 
 const Component = ({comp}) => {
+    
     return(
         <div className={styles.component}>
             <div className={styles.contents}>
@@ -11,6 +12,8 @@ const Component = ({comp}) => {
             <input type="number" className={styles.compQuant}
             value={comp.quantity}/>
             </div>
+            <div className="label">{comp.unit}</div>
+
         </div>
     )
 }

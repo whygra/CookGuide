@@ -85,7 +85,7 @@ const Chart = (props) => {
         </div>
         {
             tasks.map(el =>
-                <Task key={el.key} task={el}/>)
+                <Task key={el._id} task={el}/>)
         }
         </div>
     )

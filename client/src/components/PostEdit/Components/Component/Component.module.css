@@ -1,7 +1,7 @@
 .component {
     position: relative;
     display: grid;
-    grid-template-columns: 30px 1fr;
+    grid-template-columns: 30px 1fr 70px;
     height: 30px;
     width: 95vmin;
     background-color: transparent;
@@ -26,4 +26,8 @@
 .compName {
     padding: 5px;
     width: 100%;
+}
+
+.select {
+
 }

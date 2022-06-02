@@ -8,14 +8,15 @@ import Chart from './Chart/Chart'
 import Components from './Components/Components'
 import { setReadable } from 'actions/readablePost'
 
-const PostView = (props) => {
-
+const PostView = () => {
     const [searchParams, setPostId] = useSearchParams()
     const postId = searchParams.get("post");
     
     const dispatch = useDispatch()
     // set redux state
-    dispatch(setReadable(postId))
+    useEffect(()=> {
+        dispatch(setReadable(postId))
+    }, [])
 
     const post = useSelector((state) => state.readablePost)
 

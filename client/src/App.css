@@ -8,13 +8,23 @@
     border: none;
 }
 
-input {
+input, .label {
     border: solid 1px var(--outer-border-color);
     border-radius: 5px;
 }
 
-button {
+input[type=number], input[type=text], .label {
+    background-color:rgb(255, 255, 255);
+    padding: 5px;
+}
+
+button, select {
     cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid var(--outer-border-color);
+    border-radius: 10px;
+    height: 30px;
+    padding: 5px;
 }
 
 

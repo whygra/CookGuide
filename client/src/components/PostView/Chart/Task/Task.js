@@ -14,13 +14,11 @@ const Task = ({task}) => {
     const [width, setWidth] = useState(timeEnd-timeStart)
     const [middle, setMiddle] = useState(timeStart + width/2)
 
-
-
     const getBackgroundSize = () => {
         return {
             left: `${(timeStart * 100) / time}%`, 
             right: `${time - (timeEnd * 100) / time}%`,
-            width: `${width * 100 / time}%`
+            width: `${(timeEnd-timeStart) * 100 / time}%`
         };
     };
 

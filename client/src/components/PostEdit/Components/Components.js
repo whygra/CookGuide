@@ -22,7 +22,7 @@ const Components = () => {
             id: comps.length,
             title: "",
             quantity: 1,
-            key: new Date().getTime()
+            unit: "g",
         }
 
         dispatch(setComps([
@@ -36,7 +36,7 @@ const Components = () => {
         <button onClick={(e) => handleAddComp(e)}>add comp</button>
 
         {comps.map(el =>
-            <Component key={el.key}
+            <Component key={el._id}
             comp={el}
             className={styles.taskWrapper}/>
         )}

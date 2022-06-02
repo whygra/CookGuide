@@ -12,11 +12,7 @@
     background-color: rgb(255, 255, 255);
 }
 .postDetails button{
-    background-color: rgb(255, 255, 255);
-    border: 1px solid var(--outer-border-color);
-    border-radius: 10px;
-    height: 30px;
-    padding: 7px;
+
 }
 
 .title {

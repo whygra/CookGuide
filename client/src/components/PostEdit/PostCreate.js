@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './PostEdit.module.css'
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import PostEdit from './PostEdit'
 import { createPost } from 'actions/posts'
@@ -10,6 +10,7 @@ import { resetEditable } from 'actions/editablePost'
 
 const PostCreate = () => {
     
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     useEffect(()=> {
@@ -17,10 +18,11 @@ const PostCreate = () => {
     }, [])
 
     const post = useSelector((state) => state.editablePost)
-
+    console.log("dfhstrt")
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(createPost(post))
+        navigate(`/`)
     }
 
     return(

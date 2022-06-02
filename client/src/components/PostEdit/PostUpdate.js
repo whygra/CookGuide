@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './PostEdit.module.css'
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import PostEdit from './PostEdit'
 import { updatePost } from 'actions/posts'
@@ -11,8 +11,9 @@ import { setEditable } from 'actions/editablePost'
 const PostUpdate = () => {
 
     const [searchParams, setPostId] = useSearchParams()
-    const postId = searchParams.get("post");
-    
+    const postId = searchParams.get("post")
+
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     // set redux state
     useEffect(()=> {
@@ -23,7 +24,10 @@ const PostUpdate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(updatePost(post))
+        dispatch(updatePost(post)).then(() => {
+            navigate(`/view/?post=${postId}`)
+        })
+        
     }
     if (post._id != postId){
         return (<h1>Loading...</h1>)

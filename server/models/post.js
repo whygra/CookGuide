@@ -20,6 +20,7 @@ const componentSchema = mongoose.Schema({
         min: 1,
         default: 1
     },
+    unit: String
 })
 const postSchema = mongoose.Schema({
     title: String,
@@ -41,7 +42,7 @@ const postSchema = mongoose.Schema({
     time: {
         type: Number,
         default: 30
-    }
+    },
 })
 
 const Post = mongoose.model('Post', postSchema)

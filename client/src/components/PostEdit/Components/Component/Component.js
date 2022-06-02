@@ -24,6 +24,7 @@ const Component = ({comp}) => {
         if (index >= 0 && index < newComps.length) {
             newComps[index] = comp;
         }
+
         dispatch(setComps([...newComps]))
     }
 
@@ -39,6 +40,12 @@ const Component = ({comp}) => {
         setComp(comp.id, newComp)
     }
 
+    const unitChange = (e) => {
+        let newComp = comp
+        newComp.unit = e.target.value
+        setComp(comp.id, newComp)
+    }
+
     return(
         <div className={styles.component}>
             <button className={styles.rmvBtn} onClick={removeComp}>X</button>
@@ -48,6 +55,12 @@ const Component = ({comp}) => {
             <input type="number" className={styles.compQuant}
             value={comp.quantity} onChange={quantChange}/>
             </div>
+            <select className={styles.select} onChange={unitChange}>
+                <option>g</option>
+                <option>piece</option>
+                <option>t-sp</option>
+                <option>tb-sp</option>
+            </select>
         </div>
     )
 }

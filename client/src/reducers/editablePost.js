@@ -5,7 +5,7 @@ const initTasks = [
 ]
 
 const initComponents = [
-    {title: "", quantity: 0, key: "init0"},
+    {title: "", quantity: 0, unit: "g", key: "init0"},
 ]
 
 const initPost = {
