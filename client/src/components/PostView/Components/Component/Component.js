@@ -7,12 +7,16 @@ const Component = ({comp}) => {
     return(
         <div className={styles.component}>
             <div className={styles.contents}>
-            <input type="text" className={styles.compName}
-            value={comp.title}/>
-            <input type="number" className={styles.compQuant}
-            value={comp.quantity}/>
+                <div className={styles.nameContainer}>
+                    <div className={styles.compName}>{comp.title}</div>
+                    <hr className={styles.line}/>
+                </div>
+
+                <div className={styles.compQuant}>
+                    <div className={styles.quantValue}>{comp.quantity}</div>
+                    <small className={styles.quantUnit}>{comp.unit}</small>
+                </div>
             </div>
-            <div className="label">{comp.unit}</div>
 
         </div>
     )

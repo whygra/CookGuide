@@ -51,17 +51,17 @@ const Task = ({task}) => {
                         <div className={styles.rangeThumb}></div>
                 </div>
             </div>
-            <input type="range" min="0" max={time}
+            <input readOnly={true} type="range" min="0" max={time}
                 disabled={false}
                 value={middle} 
                 className={styles.slider}
                 id={styles.range}/>
-            <input type="range" min="0" max={time}
+            <input readOnly={true} type="range" min="0" max={time}
                 disabled={false}
                 value={task.timeStart}
                 className={styles.slider}
                 id={styles.slider1}/>
-            <input type="range" min="0" max={time}
+            <input readOnly={true} type="range" min="0" max={time}
                 disabled={false}
                 value={task.timeEnd}
                 className={styles.slider}

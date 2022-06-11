@@ -20,23 +20,22 @@ const PostView = () => {
 
     const post = useSelector((state) => state.readablePost)
 
+    // if post not loaded (post._id didn't match url id param)
+    // show loading indicator
     if (post._id !== postId){
         return(<h1>Loading...</h1>)
     }
     return(
         <div className={styles.postDetails}>
         <Link to={`/edit/?post=${postId}`}>edit</Link>
-        <form className={styles.form}>
-        <fieldset disabled={true}>
-        <input
-        type="text" value={post.title} className={styles.title}/>
+        <div className={styles.wrapper}>
+        <div className={`label ${styles.title}`}>{post.title}</div>
         <img className={styles.image} src={post.img}/>
         <div className={styles.postBody}>
         <Components comps={post.comps}/>
         <Chart time={post.time} tasks={post.tasks}/>
         </div>
-        </fieldset>
-        </form>
+        </div>
         </div>
     )
 }

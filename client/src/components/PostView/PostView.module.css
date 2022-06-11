@@ -22,7 +22,7 @@
 .title {
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 10px 10px 10px 15px;
+    padding: 0px 10px 10px 15px;
     font: 4em sans-serif;
     width: 95vmin;
     height: 80px;
@@ -45,7 +45,7 @@
     float: right;
 }
 
-.form {
+.wrapper {
     padding-bottom: 40px;
 
 }

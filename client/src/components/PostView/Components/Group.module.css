@@ -1,8 +1,35 @@
+.components{
+    transition: 0.3s;
+    
+}
 .hr{
     width:100%;
     height: 3px;
     background-color: black;
+    border-radius: 5px;
 }
 .title{
+    margin: 15px 0px 0px 5px;
+}
 
+.groupHeader {
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    height: 40px;
+}
+
+.foldBtn {
+    max-height: 20px;
+    width: 40px;
+    margin: 15px 0px 0px 5px;
+}
+
+.btnIco {
+    margin-top: -5px;
+}
+
+.compsWrapper{
+    
+    background-color: white;
+    border-radius: 5px;
 }
