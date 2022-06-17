@@ -1,4 +1,5 @@
 import image from 'images/dish01.jpg'
+import * as actions from 'constants/actionTypes'
 
 const initTasks = [
     {id: 0, name: "", timeStart: 0, timeEnd: 15, key: "init0"},
@@ -15,9 +16,9 @@ const initPost = {
 
 export default (post = [], action) => {
     switch (action.type) {
-        case 'SET_READABLE':
+        case actions.SET_READABLE:
             return action.payload
-        case 'SET_TITLE':
+        case actions.SET_TITLE:
             return {...post, title: action.payload}
         default:
             return post

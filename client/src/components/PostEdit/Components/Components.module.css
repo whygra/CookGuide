@@ -2,3 +2,9 @@
     /* border: 1px solid var(--border-color); */
     padding-bottom: 1em;
 }
+
+.rmvBtn {
+    position: relative;
+    width: 30px;
+    height: 30px;
+}

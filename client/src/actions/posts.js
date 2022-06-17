@@ -1,9 +1,10 @@
 import * as api from '../api'
+import * as actions from 'constants/actionTypes'
 
 export const getPosts = () => async (dispatch) => {
     try {
         const { data } = await api.fetchPosts()
-        const action = { type: 'FETCH_ALL', payload: data }
+        const action = { type: actions.FETCH_ALL, payload: data }
         dispatch(action)
     } catch (error) {
         console.log(error.message)
@@ -14,7 +15,7 @@ export const createPost = (post) => async (dispatch) => {
     try {
         const { data } = await api.createPost(post)
 
-        const action = { type: 'CREATE', payload: data }
+        const action = { type: actions.CREATE_POST, payload: data }
         dispatch(action)
     } catch (error) {
         console.log(error.message)
@@ -24,7 +25,7 @@ export const createPost = (post) => async (dispatch) => {
 export const updatePost = (post) => async (dispatch) => {
     try {
         const { data } = await api.updatePost(post)
-        const action = { type: 'UPDATE_POST', payload: data }
+        const action = { type: actions.UPDATE_POST, payload: data }
         dispatch(action)
     } catch (error) {
         console.log(error.message)
@@ -34,7 +35,7 @@ export const updatePost = (post) => async (dispatch) => {
 export const deletePost = (id) => async (dispatch) => {
     try {
         await api.deletePost(id)
-        const action = { type: 'DELETE', payload: id }
+        const action = { type: actions.DELETE_POST, payload: id }
         dispatch(action)
     } catch (error) {
         console.log(error.message)

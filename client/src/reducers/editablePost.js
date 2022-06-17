@@ -1,3 +1,5 @@
+import * as actions from 'constants/actionTypes'
+
 import image from 'images/9th.png'
 
 const initPost = {
@@ -15,19 +17,19 @@ const initPost = {
 export default (post = structuredClone(initPost), action) => {
     switch (action.type) {
 
-        case 'SET_EDITABLE':
+        case actions.SET_EDITABLE:
             return action.payload
-        case 'RESET_EDITABLE':
+        case actions.RESET_EDITABLE:
             return structuredClone(initPost)
-        case 'SET_TITLE':
+        case actions.SET_TITLE:
             return {...post, title: action.payload}
-        case 'SET_IMG':
+        case actions.SET_IMG:
             return {...post, img: action.payload}
-        case 'SET_TIME':
+        case actions.SET_TIME:
             return {...post, time: action.payload}
-        case 'SET_COMPS':
+        case actions.SET_COMPS:
             return {...post, comps: action.payload}
-        case 'SET_TASKS':
+        case actions.SET_TASKS:
             return {...post, tasks: action.payload}
         default:
             return post
