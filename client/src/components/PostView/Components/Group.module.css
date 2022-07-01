@@ -14,13 +14,13 @@
 
 .groupHeader {
     display: grid;
-    grid-template-columns: 1fr 60px;
+    grid-template-columns: 35px 1fr;
     height: 40px;
 }
 
 .foldBtn {
     max-height: 20px;
-    width: 40px;
+    width: 30px;
     margin: 15px 0px 0px 5px;
 }
 
@@ -29,7 +29,6 @@
 }
 
 .compsWrapper{
-    
     background-color: white;
     border-radius: 5px;
 }

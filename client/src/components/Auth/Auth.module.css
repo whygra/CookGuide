@@ -1,0 +1,15 @@
+.text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0px 0px 0px 0px;
+}
+
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.formWrapper {
+    width: 260px;
+}

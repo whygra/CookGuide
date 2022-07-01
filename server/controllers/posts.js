@@ -13,8 +13,11 @@ export const getPosts = async (req, res) => {
 }
 export const createPost = async (req, res) => {
     const post = req.body
+    if(!req.userId) return res.json({message: 'Unauthenticated'})
 
-    const newPost = new Post(post)
+    const newPost = new Post(
+        {...post, creator: req.userId, createdAt: new Date().toISOString()}
+    )
     try {
         await newPost.save()
         res.status(201).json(newPost)
@@ -36,7 +39,12 @@ export const getPost = async (req, res) => {
 export const updatePost = async (req, res) => {
     const id = req.body._id;
     const post = req.body;
-    
+
+    if(!req.userId) return res.json({message: 'Unauthenticated'})
+    if(res.userId !== post.creator)
+        return res.status(403).send('Attempt to edit other user\'s post')
+
+
     if (!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).send(`no post with id: '${id}'`)
     }
@@ -49,7 +57,12 @@ export const updatePost = async (req, res) => {
 
 export const deletePost = async (req, res) => {
     const id = req.params.id;
+    const post = Post.findById(id)
     
+    if(!req.userId) return res.json({message: 'Unauthenticated'})
+    if(res.userId !== post.creator)
+        return res.status(403).send('Attempt to delete other user\'s post')
+
     if (!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).send(`no post with id: '${id}'`)
     }

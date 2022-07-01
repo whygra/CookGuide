@@ -8,7 +8,8 @@ import Sidebar from './components/Sidebar/Sidebar'
 import PostsList from './components/PostsList/PostsList'
 import PostView from './components/PostView/PostView'
 import PostUpdate from './components/PostEdit/PostUpdate'
-import PostCreate from './components/PostEdit/PostCreate'
+
+import Auth from 'components/Auth/Auth'
 
 const App = () => {
     const dispatch = useDispatch()
@@ -25,7 +26,8 @@ const App = () => {
                 <Route path="/" element={<PostsList />}/>
                 <Route path="/view" element={<PostView />}/>
                 <Route path="/edit" element={<PostUpdate/>}/>
-                <Route path="/new" element={<PostCreate/>}/>
+                <Route path="/new" element={<PostUpdate/>}/>
+                <Route path="/auth" element={<Auth/>}/>
             </Routes>
             </div>
         </div>

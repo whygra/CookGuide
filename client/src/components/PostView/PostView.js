@@ -10,15 +10,22 @@ import { setReadable } from 'actions/readablePost'
 
 const PostView = () => {
     const [searchParams, setPostId] = useSearchParams()
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
     const postId = searchParams.get("post");
     
     const dispatch = useDispatch()
     // set redux state
     useEffect(()=> {
+        const token = user?.token
+        setUser(JSON.parse(localStorage.getItem('profile')))
+
         dispatch(setReadable(postId))
     }, [])
 
     const post = useSelector((state) => state.readablePost)
+    
+    // user
+
 
     // if post not loaded (post._id didn't match url id param)
     // show loading indicator
@@ -27,7 +34,9 @@ const PostView = () => {
     }
     return(
         <div className={styles.postDetails}>
-        <Link to={`/edit/?post=${postId}`}>edit</Link>
+            {/* show link to edit conditionally */}
+        { (user?.result._id === post.creator) && 
+            <Link to={`/edit/?post=${postId}`}>edit</Link>}
         <div className={styles.wrapper}>
         <div className={`label ${styles.title}`}>{post.title}</div>
         <img className={styles.image} src={post.img}/>

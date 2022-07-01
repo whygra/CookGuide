@@ -12,3 +12,6 @@ export const SET_COMPS = "SET_COMPS"
 export const SET_TASKS = "SET_TASKS"
 
 export const SET_READABLE = "SET_READABLE"
+
+export const AUTH = "AUTH"
+export const LOGOUT = "LOGOUT"

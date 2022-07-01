@@ -18,10 +18,10 @@ const Group = ({group}) => {
     return(
         <div className={styles.components}>
         <div className={styles.groupHeader}>
-            <h3 className={styles.title}>{group.title}</h3>
             <button onClick={foldHandler} className={styles.foldBtn}>
-                <div className={styles.btnIco}>fold</div>
+                <div className={styles.btnIco}>{fold ? ">" : "▼"}</div>
             </button>
+            <h3 className={styles.title}>{group.title}</h3>
         </div>
         <div className={styles.hr}></div>
         { !fold &&
